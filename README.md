@@ -7,11 +7,6 @@ This is a backend API for a social network web application where users can share
 - Features
 - Installation
 - Usage
-- API Endpoints
-  - User Routes
-  - Thought Routes
-  - Friend Routes
-  - Reaction Routes
 - Technologies Used
 - Seed Data
 - License
@@ -40,7 +35,7 @@ This is a backend API for a social network web application where users can share
     - npm install
 - Create a .env file in the root of the project and define the following environment variables:
 - Start the MongoDB server locally:
-    - mongod
+    - mongodb
 - Run the application:
     - npm start
 
