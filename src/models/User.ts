@@ -1,18 +1,25 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Document, ObjectId } from 'mongoose';
 
-const userSchema = new Schema(
+export interface IUser extends Document {
+  username: string;
+  email: string;
+  thoughts:ObjectId[];
+  friends: ObjectId[];
+}
+
+const userSchema = new  Schema<IUser>(
   {
     username: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
       trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      match: /.+@.+\..+/,
+      match: [/.+@.+\..+/, 'Please enter a valid email address'],
     },
     thoughts: [
       {
@@ -28,13 +35,18 @@ const userSchema = new Schema(
     ],
   },
   {
-    toJSON: { virtuals: true },
+    toJSON: {
+      virtuals: true,
+    },
     id: false,
   }
 );
 
+// Virtual to retrieve friend count
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 
-export const User = model('User', userSchema);
+const User = model('user', userSchema);
+
+export default User
